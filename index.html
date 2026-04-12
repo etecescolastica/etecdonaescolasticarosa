@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Rota — Serviços Logísticos Terceirizados</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0B0B14;
+  --ink2:#1a1a2e;
+  --cream:#F5F0E8;
+  --cream2:#EDE7D9;
+  --gold:#C9963A;
+  --gold2:#E8B84B;
+  --red:#8B1A1A;
+  --navy:#1A1A6B;
+  --white:#FFFFFF;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 60px;
+  transition:background 0.4s,padding 0.4s,box-shadow 0.4s;
+}
+nav.scrolled{
+  background:rgba(11,11,20,0.96);
+  backdrop-filter:blur(20px);
+  padding:14px 60px;
+  box-shadow:0 1px 0 rgba(201,150,58,0.2);
+}
+.nav-logo img{height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 0 12px rgba(201,150,58,0.4))}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;
+  color:rgba(245,240,232,0.65);text-decoration:none;transition:color 0.3s;
+}
+.nav-links a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:var(--ink2);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 60% 50%, rgba(26,26,107,0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 85% 20%, rgba(139,26,26,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 50% at 10% 80%, rgba(201,150,58,0.15) 0%, transparent 60%);
+}
+.hero-stripe{
+  position:absolute;top:0;right:0;bottom:0;width:42%;
+  background:rgba(201,150,58,0.04);
+  clip-path:polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  border-left:1px solid rgba(201,150,58,0.15);
+}
+.hero-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(201,150,58,0.15) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 70% 70% at 70% 50%, black 30%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 70% 50%, black 30%, transparent 80%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:140px 60px 80px;
+  max-width:1200px;width:100%;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  margin-bottom:32px;
+}
+.hero-eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.hero-eyebrow span{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:500}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,11vw,11rem);
+  line-height:0.88;letter-spacing:2px;
+  color:var(--cream);margin-bottom:0;
+}
+.hero-title .outline{-webkit-text-stroke:1px rgba(245,240,232,0.3);color:transparent}
+.hero-desc{
+  margin-top:40px;font-size:16px;line-height:1.8;
+  color:rgba(245,240,232,0.55);max-width:420px;font-weight:300;
+}
+.hero-actions{display:flex;align-items:center;gap:32px;margin-top:52px;flex-wrap:wrap}
+.btn-gold{
+  background:var(--gold);color:var(--ink);
+  padding:16px 40px;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;
+  clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition:all 0.3s;display:inline-block;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-ghost{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;
+  color:rgba(245,240,232,0.6);text-decoration:none;
+  display:flex;align-items:center;gap:10px;transition:color 0.3s;
+}
+.btn-ghost:hover{color:var(--cream)}
+.btn-ghost-arrow{font-size:18px;transition:transform 0.3s;display:inline-block}
+.btn-ghost:hover .btn-ghost-arrow{transform:translateX(6px)}
+.hero-logo-float{
+  position:absolute;right:6%;top:50%;transform:translateY(-50%);z-index:2;
+}
+.hero-logo-ring{
+  width:340px;height:340px;border-radius:50%;
+  border:1px solid rgba(201,150,58,0.2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;animation:rotate-ring 20s linear infinite;
+}
+.hero-logo-ring::before{
+  content:'';position:absolute;inset:16px;border-radius:50%;
+  border:1px dashed rgba(201,150,58,0.15);
+}
+.hero-logo-inner{
+  width:260px;height:260px;border-radius:50%;
+  background:rgba(245,240,232,0.05);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(201,150,58,0.25);
+  display:flex;align-items:center;justify-content:center;
+  animation:rotate-ring 20s linear infinite reverse;
+}
+.hero-logo-inner img{width:200px;height:200px;object-fit:contain}
+@keyframes rotate-ring{to{transform:rotate(360deg)}}
+
+/* TICKER */
+.ticker{
+  background:var(--gold);padding:14px 0;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.ticker-inner{
+  display:flex;gap:0;white-space:nowrap;
+  animation:ticker 25s linear infinite;
+}
+.ticker-item{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15px;letter-spacing:3px;
+  color:var(--ink);padding:0 40px;
+  display:inline-flex;align-items:center;gap:40px;
+}
+.ticker-dot{width:5px;height:5px;background:var(--ink);border-radius:50%;opacity:0.4;display:inline-block}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* S-LABEL */
+.s-label{
+  font-size:10px;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);font-weight:500;margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.s-label::before{content:'';width:24px;height:1px;background:var(--gold);flex-shrink:0}
+
+/* HISTÓRIA */
+.historia-wrap{background:var(--cream);color:var(--ink)}
+.historia-inner{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
+.historia-left{
+  background:var(--ink2);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:80px;position:relative;overflow:hidden;
+}
+.historia-left-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 70%, rgba(139,26,26,0.5) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(26,26,107,0.4) 0%, transparent 50%);
+}
+.historia-year{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(6rem,12vw,12rem);
+  line-height:0.8;color:rgba(201,150,58,0.15);
+  position:absolute;top:40px;left:60px;letter-spacing:-4px;z-index:1;
+}
+.historia-logo-box{
+  position:relative;z-index:2;
+  width:220px;height:220px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(201,150,58,0.3);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:40px;
+}
+.historia-logo-box img{width:170px;height:170px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(201,150,58,0.3))}
+.historia-quote{
+  font-family:'DM Serif Display',serif;font-style:italic;
+  font-size:1.4rem;color:var(--cream);line-height:1.4;
+  position:relative;z-index:2;
+}
+.historia-quote span{color:var(--gold)}
+.historia-right{padding:80px;background:var(--cream)}
+.historia-right .s-label{color:var(--red)}
+.historia-right .s-label::before{background:var(--red)}
+.historia-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  color:var(--ink);line-height:1.15;margin-bottom:32px;
+}
+.historia-body{font-size:16px;line-height:1.9;color:#444;margin-bottom:40px}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{
+  display:grid;grid-template-columns:80px 1fr;gap:24px;
+  padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.08);
+}
+.tl-item:last-child{border-bottom:none}
+.tl-year{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--red);padding-top:4px}
+.tl-text{font-size:14px;line-height:1.8;color:#555}
+.tl-text strong{color:var(--ink);font-weight:600}
+
+/* MVV */
+.mvv-wrap{background:var(--ink);padding:120px 60px}
+.mvv-inner{max-width:1200px;margin:0 auto}
+.mvv-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,6vw,6rem);
+  color:var(--cream);letter-spacing:2px;margin-bottom:80px;
+}
+.mvv-title span{color:var(--gold)}
+.mvv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06)}
+.mvv-card{
+  background:var(--ink);padding:60px 48px;
+  position:relative;overflow:hidden;transition:background 0.4s;
+}
+.mvv-card:hover{background:rgba(26,26,107,0.3)}
+.mvv-card-num{
+  font-family:'Bebas Neue',sans-serif;font-size:5rem;
+  color:rgba(201,150,58,0.08);position:absolute;top:20px;right:28px;line-height:1;
+}
+.mvv-card-icon{font-size:24px;margin-bottom:28px;display:block}
+.mvv-card h3{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--gold);margin-bottom:20px}
+.mvv-card p{font-size:15px;line-height:1.85;color:rgba(245,240,232,0.55);font-weight:300}
+
+
+
+/* CONTATOS */
+.contatos-wrap{background:var(--ink2);padding:120px 60px}
+.contatos-inner{max-width:1200px;margin:0 auto}
+.contatos-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:80px;gap:40px}
+.contatos-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,7rem);color:var(--cream);letter-spacing:2px;line-height:0.9}
+.contatos-title span{color:var(--gold)}
+.contatos-sub{max-width:300px;font-size:15px;line-height:1.7;color:rgba(245,240,232,0.45);text-align:right}
+.contatos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,0.05)}
+.contato-card{
+  background:var(--ink2);padding:60px 48px;
+  position:relative;overflow:hidden;transition:background 0.4s;
+}
+.contato-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--red),var(--gold));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
+}
+.contato-card:hover{background:rgba(26,26,107,0.2)}
+.contato-card:hover::before{transform:scaleX(1)}
+.contato-initials{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(201,150,58,0.12);border:1px solid rgba(201,150,58,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:2px;
+  margin-bottom:32px;
+}
+.contato-name{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--cream);margin-bottom:6px;line-height:1.3}
+.contato-role{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;font-weight:500}
+.contato-phone{font-size:18px;font-weight:300;color:rgba(245,240,232,0.7);margin-bottom:36px;letter-spacing:0.5px}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;
+  background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25D366;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:600;text-decoration:none;
+  clip-path:polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition:all 0.3s;
+}
+.btn-wa:hover{background:rgba(37,211,102,0.2);border-color:rgba(37,211,102,0.5)}
+.wa-dot{width:8px;height:8px;border-radius:50%;background:#25D366;flex-shrink:0}
+
+/* FOOTER */
+footer{
+  background:var(--ink);border-top:1px solid rgba(201,150,58,0.15);padding:60px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:40px;
+}
+.footer-logo img{height:60px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(201,150,58,0.2))}
+.footer-center{text-align:center}
+.footer-line{width:1px;height:40px;background:rgba(201,150,58,0.2);margin:0 auto 20px}
+.footer-copy{font-size:12px;letter-spacing:1px;color:rgba(245,240,232,0.25)}
+.footer-right{text-align:right;font-size:12px;color:rgba(245,240,232,0.25);letter-spacing:1px;line-height:1.8}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(50px);transition:opacity 0.9s ease,transform 0.9s ease}
+.fade-up.in{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  nav.scrolled{padding:12px 24px}
+  .nav-links{gap:16px}
+  .nav-links a{font-size:10px;letter-spacing:1px}
+  .hero-content{padding:120px 24px 60px}
+  .hero-logo-float{display:none}
+  .historia-inner{grid-template-columns:1fr}
+  .historia-left{min-height:380px;padding:60px 24px}
+  .historia-right{padding:60px 24px}
+  .mvv-grid{grid-template-columns:1fr}
+  .mvv-wrap{padding:80px 24px}
+  .servicos-header{grid-template-columns:1fr}
+  .servicos-wrap{padding:80px 24px}
+  .contatos-wrap{padding:80px 24px}
+  .contatos-header{flex-direction:column;align-items:flex-start}
+  .contatos-sub{text-align:left}
+  .contatos-grid{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;text-align:center;padding:40px 24px}
+  .footer-right{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="logo.png" alt="Nova Rota" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:1.8rem;color:#C9963A;letter-spacing:3px;\'>NOVA ROTA</span>'">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#historia">História</a></li>
+    <li><a href="#mvv">Pilares</a></li>
+    <li><a href="#contatos">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Desde 2003 · São Vicente, SP</span>
+    </div>
+    <h1 class="hero-title">
+      NOVA<br>
+      <span class="outline">ROTA</span>
+    </h1>
+    <p class="hero-desc">Soluções logísticas terceirizadas com mais de duas décadas de excelência, confiança e resultados reais.</p>
+    <div class="hero-actions">
+      <a href="#contatos" class="btn-gold">Fale Conosco</a>
+      <a href="#historia" class="btn-ghost">Nossa história <span class="btn-ghost-arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-logo-float">
+    <div class="hero-logo-ring">
+      <div class="hero-logo-inner">
+        <img src="logo.png" alt="Nova Rota Logo" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Logística de Excelência <span class="ticker-dot"></span></span>
+    <span class="ticker-item">+20 Anos de Mercado <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Terceirização Estratégica <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Resultados Reais <span class="ticker-dot"></span></span>
+    <span class="ticker-item">São Vicente · SP · Brasil <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Logística de Excelência <span class="ticker-dot"></span></span>
+    <span class="ticker-item">+20 Anos de Mercado <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Terceirização Estratégica <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Resultados Reais <span class="ticker-dot"></span></span>
+    <span class="ticker-item">São Vicente · SP · Brasil <span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- HISTÓRIA -->
+<div class="historia-wrap" id="historia">
+  <div class="historia-inner">
+    <div class="historia-left">
+      <div class="historia-left-bg"></div>
+      <div class="historia-year">2003</div>
+      <div class="historia-logo-box">
+        <img src="logo.png" alt="Nova Rota" onerror="this.style.display='none'">
+      </div>
+      <p class="historia-quote">"Fundada por mulheres que <span>acreditavam</span> que logística é, antes de tudo, sobre pessoas."</p>
+    </div>
+    <div class="historia-right">
+      <p class="s-label fade-up" style="color:var(--red)"><span style="display:none"></span>Nossa Trajetória</p>
+      <h2 class="historia-title fade-up">Uma história construída com coragem, propósito e visão de futuro.</h2>
+      <p class="historia-body fade-up">A Nova Rota nasceu em 2003, fundada por três mulheres determinadas a transformar a logística terceirizada no Brasil. Com sede em São Vicente, SP, a empresa cresceu sobre bases sólidas de confiança, excelência operacional e relações humanas genuínas.</p>
+      <div class="timeline fade-up">
+        <div class="tl-item">
+          <div class="tl-year">2003</div>
+          <div class="tl-text"><strong>Fundação:</strong> Maria Clara, Mariana e Maria Eduarda unem expertises e criam a Nova Rota com uma missão clara — transformar a logística terceirizada.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2010</div>
+          <div class="tl-text"><strong>Expansão:</strong> Crescimento expressivo da carteira de clientes e consolidação como referência regional em serviços logísticos.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">Hoje</div>
+          <div class="tl-text"><strong>+20 anos:</strong> Mais de duas décadas conectando empresas a soluções inteligentes, com uma equipe apaixonada e comprometida com resultados.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MVV -->
+<div class="mvv-wrap" id="mvv">
+  <div class="mvv-inner">
+    <p class="s-label fade-up">Nossos Pilares</p>
+    <h2 class="mvv-title fade-up">O que nos <span>move</span>.</h2>
+    <div class="mvv-grid">
+      <div class="mvv-card fade-up">
+        <div class="mvv-card-num">01</div>
+        <span class="mvv-card-icon">◎</span>
+        <h3>Missão</h3>
+        <p>Oferecer soluções logísticas terceirizadas com excelência, agilidade e comprometimento — sendo o elo estratégico entre nossos clientes e o sucesso de suas operações.</p>
+      </div>
+      <div class="mvv-card fade-up">
+        <div class="mvv-card-num">02</div>
+        <span class="mvv-card-icon">◈</span>
+        <h3>Visão</h3>
+        <p>Ser a empresa de logística terceirizada mais confiável do Brasil, reconhecida pela inovação, qualidade humana e pelo impacto positivo que geramos nos negócios de nossos clientes.</p>
+      </div>
+      <div class="mvv-card fade-up">
+        <div class="mvv-card-num">03</div>
+        <span class="mvv-card-icon">◇</span>
+        <h3>Valores</h3>
+        <p>Ética, transparência e respeito guiam cada decisão. Negócios sólidos se constroem sobre relações honestas e no aprimoramento constante de pessoas e processos.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- CONTATOS -->
+<div class="contatos-wrap" id="contatos">
+  <div class="contatos-inner">
+    <div class="contatos-header fade-up">
+      <h2 class="contatos-title">FALE<br>COM A<br><span>GENTE.</span></h2>
+      <p class="contatos-sub">Estamos prontas para encontrar a melhor solução logística para o seu negócio.</p>
+    </div>
+    <div class="contatos-grid">
+      <div class="contato-card fade-up">
+        <div class="contato-initials">MC</div>
+        <h3 class="contato-name">Maria Clara Paschoal</h3>
+        <p class="contato-role">Cofundadora</p>
+        <p class="contato-phone">(13) 99145-9447</p>
+        <a href="https://wa.me/5513991459447" target="_blank" class="btn-wa">
+          <span class="wa-dot"></span> WhatsApp
+        </a>
+      </div>
+      <div class="contato-card fade-up">
+        <div class="contato-initials">MS</div>
+        <h3 class="contato-name">Mariana Saraiva</h3>
+        <p class="contato-role">Cofundadora</p>
+        <p class="contato-phone">(13) 99792-0469</p>
+        <a href="https://wa.me/5513997920469" target="_blank" class="btn-wa">
+          <span class="wa-dot"></span> WhatsApp
+        </a>
+      </div>
+      <div class="contato-card fade-up">
+        <div class="contato-initials">ME</div>
+        <h3 class="contato-name">Maria Eduarda Rodrigues</h3>
+        <p class="contato-role">Cofundadora</p>
+        <p class="contato-phone">(13) 99792-0469</p>
+        <a href="https://wa.me/5513997920469" target="_blank" class="btn-wa">
+          <span class="wa-dot"></span> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="Nova Rota" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:1.5rem;color:#C9963A;letter-spacing:3px;\'>NOVA ROTA</span>'">
+  </div>
+  <div class="footer-center">
+    <div class="footer-line"></div>
+    <p class="footer-copy">© 2003 – 2026 Nova Rota</p>
+  </div>
+  <div class="footer-right">
+    <p>São Vicente · SP · Brasil</p>
+    <p>Serviços Logísticos Terceirizados</p>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 100);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
